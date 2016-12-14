@@ -1,0 +1,15 @@
+{
+    "name": "zabbix-dash-eventAcknowledge",
+    "version": "0.1.0",
+    "description": "Accept Zabbix events with dash button",
+    "main": "index.js",
+    "scripts": {
+        "scan": "dash-button scan"
+    },
+    "author": "usiusi360",
+    "license": "MIT",
+    "dependencies": {
+        "dash-button": "^2.0.0",
+        "zabbix-promise": "^1.0.2"
+    }
+}
