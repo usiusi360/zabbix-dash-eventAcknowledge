@@ -1,18 +1,23 @@
 'use strict';
 
 const DashButton = require("dash-button");
-const PHY_ADDR = "XX:XX:XX:XX:XX:XX"; // amazon dash botton のmacアドレスを指定
+const Zabbix = require('zabbix-promise');
+const http = require('http');
+const param = require("./conf.js");
 
-let button = new DashButton(PHY_ADDR);
+let button = new DashButton(param.PHY_ADDR);
+let targetUrl=param.cs_url + "/ctrl/?mode=" + param.cs_mode + "&repeat=" + param.cs_repeat + "&period=" + param.cs_period + "&json=1";
 console.log("listening start");
 
 button.addListener(() => {
-  let Zabbix = require('zabbix-promise');
   let zabbix = new Zabbix(
+    param.zabbix_url,
+    param.zabbix_user,
+    param.zabbix_password
     // zabbixの設定
-    'http://localhost/zabbix/api_jsonrpc.php',
-    'Admin',
-    'password'
+    //'http://localhost/zabbix/api_jsonrpc.php',
+    //'Admin',
+    //'password'
   );
 
   zabbix.login()
@@ -62,11 +67,22 @@ button.addListener(() => {
     })
     .then(function(value) {
       console.log("=== !! accept !! ===");
+      var req = http.get(targetUrl + "&color=" + param.cs_color_ok, function(res) {
+        res.setEncoding('utf8');
+        res.on('data', function(str) {
+          console.log(str);
+        });
+      });
     })
     .catch(function(reason) {
       console.log("=== !! exception !! ===");
       console.log(reason);
+      var req = http.get(targetUrl + "&color=" + param.cs_color_err, function(res) {
+        res.setEncoding('utf8');
+        res.on('data', function(str) {
+          console.log(str);
+        });
+      });
     })
-
 
 });
