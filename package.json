@@ -4,13 +4,17 @@
   "description": "Accept Zabbix events with dash button",
   "main": "index.js",
   "scripts": {
-    "scan": "dash-button scan"
+    "scan": "dash-button scan",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "usiusi360",
   "license": "MIT",
   "dependencies": {
     "dash-button": "^2.0.0",
     "http": "0.0.0",
-    "zabbix-promise": "^1.0.2"
-  }
+    "zabbix-promise": "^1.0.2",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
