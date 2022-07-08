@@ -9,7 +9,7 @@
   "author": "usiusi360",
   "license": "MIT",
   "dependencies": {
-    "dash-button": "^2.0.0",
+    "dash-button": "^3.2.0",
     "http": "0.0.0",
     "zabbix-promise": "^1.0.2"
   }
